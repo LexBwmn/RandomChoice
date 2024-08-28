@@ -11,15 +11,28 @@
 import openai
 import os
 
-#model that my chatbot is based off of 
-model = "gpt-4o-mini"
+def response_gpt(user_input):
+    message = {
+        "role": "user",
+        "content": user_input
+    }
 
-
-def cont(messages, projects=0):
     response = openai.chat.completions.create(
-        model=model,
-        messages=messages,
-        projects=projects,
+        messages = [message], 
+        #model that my chatbot is based off of 
+        model = "gpt-4o-mini" 
     )
     return response.choices[0].message.content
+
+def chat():
+    while True:
+        user_input = input("You: ")
+        if user_input == ('exit', 'Goodbye', 'Close'):
+            print('Chatbot: Goodbye')
+        break
+    response = response_gpt(user_input)
+    print(f"Chatbot: {response}")
+
+if __name__ == "__main__":
+    chat()
 
