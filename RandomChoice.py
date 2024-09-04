@@ -11,6 +11,11 @@
 import openai
 import os
 
+# Opening the API_KEY file with my API Key
+API_KEY = open("API_KEY", "r").read()
+openai.api_key = API_KEY
+
+# GPT response
 def response_gpt(user_input):
     message = {
         "role": "user",
@@ -24,6 +29,7 @@ def response_gpt(user_input):
     )
     return response.choices[0].message.content
 
+#User and GPT loop
 def chat():
     while True:
         user_input = input("You: ")
